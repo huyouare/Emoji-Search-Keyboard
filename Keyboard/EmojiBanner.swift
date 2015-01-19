@@ -14,14 +14,15 @@ with something (or leave it blank if you like.)
 */
 
 class EmojiBanner: ExtraView {
-    
+
+    let screenSize: CGRect = UIScreen.mainScreen().bounds
     var emojiButton: UIButton = UIButton()
     
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         
-        emojiButton.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
-        emojiButton.addTarget(self, action: "released:", forControlEvents: .TouchDown)
+        emojiButton.addTarget(self, action: "pressed:", forControlEvents: .TouchDown)
+        emojiButton.addTarget(self, action: "released:", forControlEvents: .TouchUpInside)
         
         self.addSubview(self.emojiButton)
         
@@ -56,18 +57,23 @@ class EmojiBanner: ExtraView {
     //    }
     
     func pressed(sender: UIButton!) {
-        self.emojiButton.backgroundColor = UIColor.brownColor()
+        self.emojiButton.backgroundColor = UIColor(red: (112/255.0), green: (112/255.0), blue: (112/255.0), alpha: 0.8)
     }
     
     func released(sender: UIButton!) {
-        self.emojiButton.backgroundColor = UIColor.blueColor()
+        self.emojiButton.backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
     }
     
     func updateAppearance() {
-        self.emojiButton.backgroundColor = UIColor.blueColor()
+        self.emojiButton.backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
         self.emojiButton.setTitle("hi", forState: UIControlState.Normal)
-        self.emojiButton.setTitle("pressed", forState: UIControlState.Highlighted)
+        self.emojiButton.setTitle(toString(self.frame.width), forState: UIControlState.Highlighted)
         
         self.emojiButton.sizeToFit()
+        
+        self.emojiButton.frame = CGRectMake(self.emojiButton.frame.minX,
+            self.emojiButton.frame.minY,
+            screenSize.width,
+            self.emojiButton.frame.height)
     }
 }
