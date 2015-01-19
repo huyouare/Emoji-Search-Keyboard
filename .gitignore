@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 .DS_Store
 project.xcworkspace
 xcuserdata
+=======
+>>>>>>> 148cf6ec965166923ac76157c9d97fd41e09c0ed
 # Xcode
 #
 build/
