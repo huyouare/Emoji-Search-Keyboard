@@ -36,6 +36,8 @@
 		4EF16F9819D255030076AFCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF16F9519D255030076AFCB /* ViewController.swift */; };
 		4EF16F9B19D2550D0076AFCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF16F9A19D2550D0076AFCB /* AppDelegate.swift */; };
 		4EF16F9F19D2552E0076AFCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EF16F9D19D2552E0076AFCB /* Main.storyboard */; };
+		83ED2E041A6CE1960067C1B3 /* EmojiSearchKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ED2E031A6CE1960067C1B3 /* EmojiSearchKeyboard.swift */; };
+		83ED2E061A6D72330067C1B3 /* EmojiBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ED2E051A6D72330067C1B3 /* EmojiBanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,8 @@
 		4EF16F9519D255030076AFCB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4EF16F9A19D2550D0076AFCB /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EF16F9E19D2552E0076AFCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		83ED2E031A6CE1960067C1B3 /* EmojiSearchKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiSearchKeyboard.swift; sourceTree = "<group>"; };
+		83ED2E051A6D72330067C1B3 /* EmojiBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiBanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +202,8 @@
 			children = (
 				4E6AEE4B19D246D700931E8F /* Catboard.swift */,
 				4EEFD78819E0DC6B004D4974 /* CatboardBanner.swift */,
+				83ED2E031A6CE1960067C1B3 /* EmojiSearchKeyboard.swift */,
+				83ED2E051A6D72330067C1B3 /* EmojiBanner.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -464,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E52A6D21A06A61F006A08CE /* ImageKey.swift in Sources */,
+				83ED2E041A6CE1960067C1B3 /* EmojiSearchKeyboard.swift in Sources */,
 				4E52A6D41A06A626006A08CE /* ExtraView.swift in Sources */,
 				4EC2A47019DF811E00F789E1 /* ForwardingView.swift in Sources */,
 				4EC2A46E19DF811E00F789E1 /* KeyboardLayout.swift in Sources */,
@@ -471,6 +478,7 @@
 				4E5B67A2196E03B700114361 /* KeyboardModel.swift in Sources */,
 				4E60A13C1979FA8E00854CC8 /* KeyboardConnector.swift in Sources */,
 				4E00A6E5197183EE009414F2 /* KeyboardKey.swift in Sources */,
+				83ED2E061A6D72330067C1B3 /* EmojiBanner.swift in Sources */,
 				4EEFD78919E0DC6B004D4974 /* CatboardBanner.swift in Sources */,
 				4EE7599B19F75A0D00B4E6ED /* Utilities.swift in Sources */,
 				4EEFD78B19E0DF15004D4974 /* Shapes.swift in Sources */,
