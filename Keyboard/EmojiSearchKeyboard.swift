@@ -27,51 +27,74 @@ class EmojiSearchKeyboard: KeyboardViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var currentWord: String = ""
+    
     override func keyPressed(key: Key) {
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             let keyOutput = key.outputForCase(self.shiftState.uppercase())
             
-            if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
-                textDocumentProxy.insertText(keyOutput)
-                return
-            }
+//            if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
+//                textDocumentProxy.insertText(keyOutput)
+//                return
+//            }
+            
+            
+//            if key.type == .Character || key.type == .SpecialCharacter {
+//                let context = textDocumentProxy.documentContextBeforeInput
+//                
+//                //                EmojiBanner.updateButtons(context)
+//                
+//                if context != nil {
+//                    if countElements(context) < 2 {
+//                        textDocumentProxy.insertText(keyOutput)
+//                        return
+//                    }
+//                    
+//                    var index = context!.endIndex
+//                    
+//                    index = index.predecessor()
+//                    if context[index] != " " {
+//                        textDocumentProxy.insertText(keyOutput)
+//                        return
+//                    }
+//                    // previous character was a space
+//                    
+//                    index = index.predecessor()
+//                    if context[index] == " " {
+//                        textDocumentProxy.insertText(keyOutput)
+//                        return
+//                    }
+//                    // character before previous was not a space
+//                    
+//                    // textDocumentProxy.insertText("\(randomCat())")
+//                    // textDocumentProxy.insertText(" ")
+//                    textDocumentProxy.insertText(keyOutput)
+//                    return
+//                }
+//                else {
+//                    textDocumentProxy.insertText(keyOutput)
+//                    return
+//                }
+//            }
+
             
             if key.type == .Character || key.type == .SpecialCharacter {
                 let context = textDocumentProxy.documentContextBeforeInput
-                
-                if context != nil {
-                    if countElements(context) < 2 {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-                    
-                    var index = context!.endIndex
-                    
-                    index = index.predecessor()
-                    if context[index] != " " {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-                    
-                    index = index.predecessor()
-                    if context[index] == " " {
-                        textDocumentProxy.insertText(keyOutput)
-                        return
-                    }
-                    
-                    // textDocumentProxy.insertText("\(randomCat())")
-                    textDocumentProxy.insertText(" ")
-                    textDocumentProxy.insertText(keyOutput)
-                    return
+                currentWord = currentWord + keyOutput
+                EmojiBanner.updateButtons(currentWord)
+                textDocumentProxy.insertText(keyOutput)
+            }
+            else if key.type == .Backspace {
+                textDocumentProxy.insertText("b")
+                if !currentWord.isEmpty {
+                    currentWord = currentWord.substringToIndex(currentWord.endIndex.predecessor())
                 }
-                else {
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
+                EmojiBanner.updateButtons(currentWord)
             }
             else {
                 textDocumentProxy.insertText(keyOutput)
-                return
+                currentWord = ""
+                EmojiBanner.updateButtons(currentWord)
             }
         }
     }
