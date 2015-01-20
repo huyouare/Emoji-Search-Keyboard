@@ -38,6 +38,7 @@
 		4EF16F9F19D2552E0076AFCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EF16F9D19D2552E0076AFCB /* Main.storyboard */; };
 		83ED2E041A6CE1960067C1B3 /* EmojiSearchKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ED2E031A6CE1960067C1B3 /* EmojiSearchKeyboard.swift */; };
 		83ED2E061A6D72330067C1B3 /* EmojiBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ED2E051A6D72330067C1B3 /* EmojiBanner.swift */; };
+		B0806E461A6DD45200D4743F /* StringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0806E451A6DD45200D4743F /* StringBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		4EF16F9E19D2552E0076AFCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		83ED2E031A6CE1960067C1B3 /* EmojiSearchKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiSearchKeyboard.swift; sourceTree = "<group>"; };
 		83ED2E051A6D72330067C1B3 /* EmojiBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiBanner.swift; sourceTree = "<group>"; };
+		B0806E451A6DD45200D4743F /* StringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 		4E6AEE5219D2488B00931E8F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B0806E451A6DD45200D4743F /* StringBuilder.swift */,
 				4EC2A46919DF811E00F789E1 /* KeyboardViewController.swift */,
 				4E3B5A931A0654A8003366F6 /* KeyboardInputTraits.swift */,
 				4EC2A46A19DF811E00F789E1 /* KeyboardLayout.swift */,
@@ -469,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0806E461A6DD45200D4743F /* StringBuilder.swift in Sources */,
 				4E52A6D21A06A61F006A08CE /* ImageKey.swift in Sources */,
 				83ED2E041A6CE1960067C1B3 /* EmojiSearchKeyboard.swift in Sources */,
 				4E52A6D41A06A626006A08CE /* ExtraView.swift in Sources */,
