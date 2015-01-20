@@ -14,7 +14,7 @@ set the name of your KeyboardViewController subclass in the Info.plist file.
 
 let kEmojisEnabled = "kEmojisEnabled"
 
-class EmojiSearchKeyboard: KeyboardViewController {
+class EmojiSearchKeyboard: KeyboardViewController, EmojiBannerProtocol {
     
     let takeDebugScreenshot: Bool = false
     
@@ -99,6 +99,13 @@ class EmojiSearchKeyboard: KeyboardViewController {
         }
     }
     
+    func emojiButtonPressed(emojiString: String) {
+        if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
+            textDocumentProxy.insertText(emojiString)
+        }
+        currentWord = ""
+    }
+    
     override func setupKeys() {
         super.setupKeys()
         
@@ -120,6 +127,7 @@ class EmojiSearchKeyboard: KeyboardViewController {
     }
     
     override func createBanner() -> ExtraView? {
+        EmojiBanner.setDelegate(self)
         return EmojiBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
     }
     

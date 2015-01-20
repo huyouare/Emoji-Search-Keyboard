@@ -13,6 +13,10 @@ This is the demo banner. The banner is needed so that the top row popups have so
 with something (or leave it blank if you like.)
 */
 
+protocol EmojiBannerProtocol {
+    func emojiButtonPressed(emojiString: String)
+}
+
 var emojiButton: UIButton = UIButton()
     
 var emojiCodeDict: [String: String] = [
@@ -888,10 +892,15 @@ var emojiCodeDict: [String: String] = [
     "pill":                         "\u{1f48a}",
 ]
 
+var myDelegate: EmojiBannerProtocol!
+
 class EmojiBanner: ExtraView {
 
     let screenSize: CGRect = UIScreen.mainScreen().bounds
-   
+    
+    class func setDelegate(delegate: EmojiBannerProtocol) {
+        myDelegate = delegate
+    }
     
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
@@ -933,6 +942,9 @@ class EmojiBanner: ExtraView {
     
     func pressed(sender: UIButton!) {
         emojiButton.backgroundColor = UIColor(red: (112/255.0), green: (112/255.0), blue: (112/255.0), alpha: 0.8)
+        if let text = emojiButton.titleLabel?.text {
+            myDelegate.emojiButtonPressed(text)
+        }
     }
     
     func released(sender: UIButton!) {
