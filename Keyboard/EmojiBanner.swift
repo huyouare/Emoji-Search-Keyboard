@@ -992,10 +992,10 @@ class EmojiBanner: ExtraView {
         }
     }
     
-    class func updateButtons(context: String) {
+    class func updateButtons(rawContext: String) {
         var myKey: String = ""
-        
         var index: Int = 0
+        var context = rawContext.lowercaseString
         
         if !context.isEmpty && context != " " && context != "" {
             for key in emojiCodeDict.keys {
