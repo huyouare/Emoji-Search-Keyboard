@@ -100,7 +100,12 @@ class EmojiSearchKeyboard: KeyboardViewController, EmojiBannerProtocol {
     }
     
     func emojiButtonPressed(emojiString: String) {
+        var count: Int = countElements(currentWord)
+        
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
+            for i in 0..<count {
+                textDocumentProxy.deleteBackward()
+            }
             textDocumentProxy.insertText(emojiString)
         }
         currentWord = ""
