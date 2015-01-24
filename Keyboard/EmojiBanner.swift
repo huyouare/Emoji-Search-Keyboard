@@ -895,7 +895,7 @@ var emojiCodeDict: [String: String] = [
 var myDelegate: EmojiBannerProtocol!
 
 class EmojiBanner: ExtraView {
-
+    
     let screenSize: CGRect = UIScreen.mainScreen().bounds
     
     class func setDelegate(delegate: EmojiBannerProtocol) {
@@ -915,6 +915,7 @@ class EmojiBanner: ExtraView {
     }
     
     func initializeButtons(size: Int) {
+        emojiButtons = []
         for index in 0..<size {
             var button: UIButton = UIButton()
             button.addTarget(self, action: "pressed:", forControlEvents: .TouchDown)
@@ -948,14 +949,22 @@ class EmojiBanner: ExtraView {
     //    }
     
     func pressed(sender: UIButton!) {
-        sender.backgroundColor = UIColor(red: (112/255.0), green: (112/255.0), blue: (112/255.0), alpha: 0.8)
+        if self.darkMode {
+            sender.backgroundColor = UIColor(red: (112/255.0), green: (112/255.0), blue: (112/255.0), alpha: 0.8)
+        } else {
+            sender.backgroundColor = UIColor(red: (235/255.0), green: (237/255.0), blue: (239/255.0), alpha: 1.0)
+        }
         if let text = sender.titleLabel?.text {
             myDelegate.emojiButtonPressed(text)
         }
     }
     
     func released(sender: UIButton!) {
-        sender.backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
+        if self.darkMode {
+            sender.backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
+        } else {
+            sender.backgroundColor = UIColor(red: (167/255.0), green: (176/255.0), blue: (187/255.0), alpha: 0.965)
+        }
     }
     
     func updateAppearance() {
@@ -964,12 +973,16 @@ class EmojiBanner: ExtraView {
         var count: CGFloat = 0.0
         
         for index in 0..<buttonCount {
-            
-            emojiButtons[index].backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
+            if self.darkMode {
+                emojiButtons[index].backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
+            } else {
+                emojiButtons[index].backgroundColor = UIColor(red: (167/255.0), green: (176/255.0), blue: (187/255.0), alpha: 0.965)
+            }
+
             emojiButtons[index].setTitle("", forState: UIControlState.Normal)
             emojiButtons[index].sizeToFit()
             
-            emojiButtons[index].frame = CGRectMake(emojiButtons[index].frame.minX + count,
+            emojiButtons[index].frame = CGRectMake(count,
                 emojiButtons[index].frame.minY,
                 screenSize.width / CGFloat(buttonCount) - 2.0,
                 emojiButtons[index].frame.height)
