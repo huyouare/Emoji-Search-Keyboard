@@ -954,7 +954,7 @@ class EmojiBanner: ExtraView {
         } else {
             sender.backgroundColor = UIColor(red: (235/255.0), green: (237/255.0), blue: (239/255.0), alpha: 1.0)
         }
-        if let text = sender.titleLabel?.text {
+        if let text = sender.titleLabel!.text {
             myDelegate.emojiButtonPressed(text)
         }
     }
@@ -980,12 +980,13 @@ class EmojiBanner: ExtraView {
             }
 
             emojiButtons[index].setTitle("", forState: UIControlState.Normal)
+            emojiButtons[index].titleLabel!.font = UIFont.systemFontOfSize(32.0)
             emojiButtons[index].sizeToFit()
             
             emojiButtons[index].frame = CGRectMake(count,
                 emojiButtons[index].frame.minY,
                 screenSize.width / CGFloat(buttonCount) - 2.0,
-                emojiButtons[index].frame.height)
+                50.0)
             
             count += screenSize.width / CGFloat(buttonCount)
         }
@@ -996,7 +997,7 @@ class EmojiBanner: ExtraView {
         
         var index: Int = 0
         
-        if !context.isEmpty {
+        if !context.isEmpty && context != " " && context != "" {
             for key in emojiCodeDict.keys {
                 if key.lowercaseString.rangeOfString(context) != nil {
                     emojiButtons[index].setTitle(emojiCodeDict[key], forState: UIControlState.Normal)
