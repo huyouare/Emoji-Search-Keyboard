@@ -535,6 +535,12 @@ class KeyboardViewController: UIInputViewController {
         if let textDocumentProxy = self.textDocumentProxy as? UIKeyInput {
             textDocumentProxy.deleteBackward()
         }
+        
+        //EmojiSearchKeyboard Edit
+        if let model = self.layout?.keyForView(sender) {
+            self.keyPressed(model)
+        }
+        
         self.setCapsIfNeeded()
         
         // trigger for subsequent deletes
@@ -556,6 +562,11 @@ class KeyboardViewController: UIInputViewController {
         if let textDocumentProxy = self.textDocumentProxy as? UIKeyInput {
             textDocumentProxy.deleteBackward()
         }
+        
+        //EmojiSearchKeyboard Edit
+        let key: Key = Key(.Backspace)
+        self.keyPressed(key)
+        
         self.setCapsIfNeeded()
     }
     

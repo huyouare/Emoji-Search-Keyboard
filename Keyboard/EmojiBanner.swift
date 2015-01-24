@@ -17,7 +17,7 @@ protocol EmojiBannerProtocol {
     func emojiButtonPressed(emojiString: String)
 }
 
-var emojiButton: UIButton = UIButton()
+var emojiButtons: [UIButton] = []
     
 var emojiCodeDict: [String: String] = [
     "capricorn":                    "\u{02651}",
@@ -905,16 +905,25 @@ class EmojiBanner: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         
-        emojiButton.addTarget(self, action: "pressed:", forControlEvents: .TouchDown)
-        emojiButton.addTarget(self, action: "released:", forControlEvents: .TouchUpInside)
-        
-        self.addSubview(emojiButton)
-        
         //        self.catSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled)
         //        self.catSwitch.transform = CGAffineTransformMakeScale(0.75, 0.75)
         //        self.catSwitch.addTarget(self, action: Selector("respondToSwitch"), forControlEvents: UIControlEvents.ValueChanged)
         
+        self.initializeButtons(5)
+        
         self.updateAppearance()
+    }
+    
+    func initializeButtons(size: Int) {
+        for index in 0..<size {
+            var button: UIButton = UIButton()
+            button.addTarget(self, action: "pressed:", forControlEvents: .TouchDown)
+            button.addTarget(self, action: "released:", forControlEvents: .TouchUpInside)
+            
+            emojiButtons.append(button)
+            
+            self.addSubview(button)
+        }
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -928,8 +937,6 @@ class EmojiBanner: ExtraView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        emojiButton.center = self.center
-        
         //        self.catSwitch.center = self.center
         
         //        self.catLabel.frame.origin = CGPointMake(self.catSwitch.frame.origin.x + self.catSwitch.frame.width + 8, self.catLabel.frame.origin.y)
@@ -941,42 +948,56 @@ class EmojiBanner: ExtraView {
     //    }
     
     func pressed(sender: UIButton!) {
-        emojiButton.backgroundColor = UIColor(red: (112/255.0), green: (112/255.0), blue: (112/255.0), alpha: 0.8)
-        if let text = emojiButton.titleLabel?.text {
+        sender.backgroundColor = UIColor(red: (112/255.0), green: (112/255.0), blue: (112/255.0), alpha: 0.8)
+        if let text = sender.titleLabel?.text {
             myDelegate.emojiButtonPressed(text)
         }
     }
     
     func released(sender: UIButton!) {
-        emojiButton.backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
+        sender.backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
     }
     
     func updateAppearance() {
-        emojiButton.backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
-        emojiButton.setTitle("", forState: UIControlState.Normal)
-//        emojiButton.setTitle("", forState: UIControlState.Highlighted)
+        let buttonCount: Int = emojiButtons.count
         
-        emojiButton.sizeToFit()
+        var count: CGFloat = 0.0
         
-        emojiButton.frame = CGRectMake(emojiButton.frame.minX,
-            emojiButton.frame.minY,
-            screenSize.width,
-            emojiButton.frame.height)
+        for index in 0..<buttonCount {
+            
+            emojiButtons[index].backgroundColor = UIColor(red: (65/255.0), green: (65/255.0), blue: (65/255.0), alpha: 0.8)
+            emojiButtons[index].setTitle("", forState: UIControlState.Normal)
+            emojiButtons[index].sizeToFit()
+            
+            emojiButtons[index].frame = CGRectMake(emojiButtons[index].frame.minX + count,
+                emojiButtons[index].frame.minY,
+                screenSize.width / CGFloat(buttonCount) - 2.0,
+                emojiButtons[index].frame.height)
+            
+            count += screenSize.width / CGFloat(buttonCount)
+        }
     }
     
     class func updateButtons(context: String) {
         var myKey: String = ""
-        for key in emojiCodeDict.keys {
-            if key.lowercaseString.rangeOfString(context) != nil {
-                myKey = key
+        
+        var index: Int = 0
+        
+        if !context.isEmpty {
+            for key in emojiCodeDict.keys {
+                if key.lowercaseString.rangeOfString(context) != nil {
+                    emojiButtons[index].setTitle(emojiCodeDict[key], forState: UIControlState.Normal)
+                    index++
+                }
+                if index == emojiButtons.count {
+                    break
+                }
             }
         }
         
-        if myKey == "" {
-            emojiButton.setTitle("", forState: UIControlState.Normal)
-        }
-        else {
-            emojiButton.setTitle(emojiCodeDict[myKey], forState: UIControlState.Normal)
+        while index < emojiButtons.count {
+            emojiButtons[index].setTitle("", forState: UIControlState.Normal)
+            index++
         }
     }
     

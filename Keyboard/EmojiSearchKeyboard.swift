@@ -30,6 +30,7 @@ class EmojiSearchKeyboard: KeyboardViewController, EmojiBannerProtocol {
     var currentWord: String = ""
     
     override func keyPressed(key: Key) {
+        
         if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             let keyOutput = key.outputForCase(self.shiftState.uppercase())
             
@@ -76,7 +77,6 @@ class EmojiSearchKeyboard: KeyboardViewController, EmojiBannerProtocol {
 //                    return
 //                }
 //            }
-
             
             if key.type == .Character || key.type == .SpecialCharacter {
                 let context = textDocumentProxy.documentContextBeforeInput
@@ -84,8 +84,8 @@ class EmojiSearchKeyboard: KeyboardViewController, EmojiBannerProtocol {
                 EmojiBanner.updateButtons(currentWord)
                 textDocumentProxy.insertText(keyOutput)
             }
+                // TODO: Implement deletion via context 'x' (whole sentence deletion)
             else if key.type == .Backspace {
-                textDocumentProxy.insertText("b")
                 if !currentWord.isEmpty {
                     currentWord = currentWord.substringToIndex(currentWord.endIndex.predecessor())
                 }
